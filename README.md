@@ -31,15 +31,14 @@ The folder structure of the [Data DAO contract](https://github.com/rk-rishikesh/
 
 ## Core Idea
 
-The DataDAO contract is build with a vision that, the developers can create their custom Data DAO on top of the DataDAO contract. 
+The DataDAO contract is build for a platform where storage providers could bid on proposals.
 
 ## Functionality and possible customization
 
 The deal is tracked by the following deal states
 
     - Proposed
-    - Passed 
-    - Rejected   
+    - Passed  
     - Active        
     - Expired
     
@@ -66,7 +65,7 @@ A simple DataDAOBounty contract allows the admins to act as the censor board for
 Once the deal proposal is created by a member and $FIL are locked inside the contract, the admins would either approve or reject the proposal. If the deal proposal is rejected, the member gets back the locked $FIL else the deal is taken forward to storage provider. 
 
 The storage provider would bid on the client proposals.
- 
+
 The storage provider would store the data generate the proof and provide the deal ID to the DataDAO. The DataDAO contract will check with the Filecoin storage market to confirm whether the supplied deal ID is activated and stores the claimed data. Once the deal is expired, the Data DAO will pay the storage provider.
 
 
