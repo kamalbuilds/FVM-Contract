@@ -18,7 +18,7 @@ npm install
 
 ### The Data DAO Contract
 
-The folder structure of the [Data DAO contract](https://github.com/rk-rishikesh/DataDAO/tree/main/contracts/data-dao) is as below
+The folder structure of the [Data DAO contract](https://github.com/legendarykamal/DataDAO/contracts/data-dao) is as below
 
     .
     ├── base                        # Base Contracts
@@ -27,7 +27,7 @@ The folder structure of the [Data DAO contract](https://github.com/rk-rishikesh/
     ├── interfaces                  # Interfaces
     │   ├── IDataDAO.sol            # Interface for Data DAO contract
     ├── DataDAO.sol                 # The Base Data DAO contract
-    └── DataDAOBounty.sol          # An example implementation of Base Data DAO contract
+    └── DataDAOBounty.sol          # DataDAOBounty Contract
 
 ## Core Idea
 
@@ -60,7 +60,7 @@ The function seeks verification from the contract on the storage provider's clai
 This function can be found inside the DataDAOCore.sol file, and is responsible to send $FIL to the storage provider. The districution of the $FIL and the time of release of the funds can be customized in the implementation contract.
 
 ## Data DAO Bounty Contract
-A simple DataDAOBounty contract allows the admins to act as the censor board for the data that is stored via the Data DAO. The users with the Data DAO membership NFT can join the Data DAO as a member and would be able to fund the deals.
+The users with the Data DAO membership NFT can join the Data DAO as a member and would be able to fund the deals.
 
 Once the deal proposal is created by a member and $FIL are locked inside the contract, the admins would either approve or reject the proposal. If the deal proposal is rejected, the member gets back the locked $FIL else the deal is taken forward to storage provider. 
 
