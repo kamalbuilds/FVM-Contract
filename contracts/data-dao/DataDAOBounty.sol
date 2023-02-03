@@ -72,7 +72,6 @@ contract DataDAOBounty is DataDAO {
     // @dev Function to fund the deal
     // @param _cidraw: Id of the cred.(msg.sender)
     function fundDeal(bytes memory _cidraw) public payable {
-        require()
         fundings[_cidraw][msg.sender] += msg.value;
     }
 
