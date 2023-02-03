@@ -12,6 +12,20 @@ contract DataDAOBounty is DataDAO {
     mapping(bytes => uint256) public dealStorageFees;
     mapping(bytes => uint64) public dealClient;
 
+    struct Bid {
+        address provider;
+        uint256 price;
+    }
+
+    mapping (bytes => Bid[]) public bids;
+
+    function bid(bytes memory _cidraw, address _provider, uint256 _price) internal {
+        bids[_cidraw].push(Bid({
+            provider: _provider,
+            price: _price
+        }));
+    }
+
     constructor(address[] memory admins, address _membershipNFT) DataDAO(admins) {
         membershipNFT = IERC721(_membershipNFT);
     }
@@ -58,6 +72,7 @@ contract DataDAOBounty is DataDAO {
     // @dev Function to fund the deal
     // @param _cidraw: Id of the cred.(msg.sender)
     function fundDeal(bytes memory _cidraw) public payable {
+        require()
         fundings[_cidraw][msg.sender] += msg.value;
     }
 
