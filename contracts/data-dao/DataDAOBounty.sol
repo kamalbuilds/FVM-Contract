@@ -4,7 +4,16 @@ pragma solidity ^0.8.13;
 import "./DataDAO.sol";
 import "../openzeppelin/contracts/token/ERC721/IERC721.sol";
 
+
+// PUSH Comm Contract Interface
+interface IPUSHCommInterface {
+    function sendNotification(address _channel, address _recipient, bytes calldata _identity) external;
+}
+
 contract DataDAOBounty is DataDAO {
+
+    // EPNS COMM ADDRESS ON ETHEREUM Gorelli, CHECK THIS: https://docs.epns.io/developers/developer-tooling/epns-smart-contracts/epns-contract-addresses
+    address public EPNS_COMM_ADDRESS = 0xb3971BCef2D791bc4027BbfedFb47319A4AAaaAa;
 
     IERC721 public membershipNFT;
 
@@ -92,7 +101,31 @@ contract DataDAOBounty is DataDAO {
         require(fundings[_cidraw][_provider] >= _price);
         fundings[_cidraw][_provider] -= _price;
         bid(_cidraw, _provider, _price);
+
+        //"0+3+Hooray! ", msg.sender, " sent ", token amount, " PUSH to you!"
+        IPUSHCommInterface(EPNS_COMM_ADDRESS).sendNotification(
+            0x69B97e0dC6b0A47656E75e55cD997579C9752C30, // from channel - recommended to set channel via dApp and put it's value -> then once contract is deployed, go back and add the contract address as delegate for your channel
+            msg.sender, // client address. For Targetted put the address to which you want to send
+            bytes(
+                string(
+                    // We are passing identity here: https://docs.epns.io/developers/developer-guides/sending-notifications/advanced/notification-payload-types/identity/payload-identity-implementations
+                    abi.encodePacked(
+                        "0", // this is notification identity: https://docs.epns.io/developers/developer-guides/sending-notifications/advanced/notification-payload-types/identity/payload-identity-implementations
+                        "+", // segregator
+                        "3", // this is payload type: https://docs.epns.io/developers/developer-guides/sending-notifications/advanced/notification-payload-types/payload (1, 3 or 4) = (Broadcast, targetted or subset)
+                        "+", // segregator
+                        "Bid Placed Alert", // this is notificaiton title
+                        "+", // segregator
+                        "Someone has placed a bid for your proposal!" // notification body
+                    )
+                )
+            )
+        );
     }
+
+
+ 
+
 
 
 }
