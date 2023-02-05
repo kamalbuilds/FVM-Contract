@@ -1,5 +1,5 @@
-# The DataDAO Contract
-**A FVM compatible  Data DAO Bounty contract**
+# The DataDAO Marketplace Contract
+**A FVM compatible Data DAO Marketplace Bidding contract**
 
 
 ### Clone the repo
@@ -11,14 +11,14 @@ git clone https://github.com/legendarykamal/FVM-Contract.git
 ### Install the node modules
 
 ```sh
-cd DataDAO
+cd FVM-Contract
 
 npm install
 ```
 
-### The Data DAO Contract
+### The Data DAO MarketPlace Contract
 
-The folder structure of the [Data DAO contract](https://github.com/legendarykamal/DataDAO/contracts/data-dao) is as below
+The folder structure of the [Data DAO contract](https://github.com/legendarykamal/FVM-Contract/blob/master/contracts/data-dao/) is as below
 
     .
     ├── base                        # Base Contracts
@@ -41,14 +41,15 @@ The deal is tracked by the following deal states
     - Passed  
     - Active        
     - Expired
-    
+    - Rejected (in the case of dispute)
+
 > Add a user
 
-This function assigns the role to the user that is being added to the DAO, the rules to and right to add the user can be customized in the implementation contract
+This function assigns the role to the user that is being added to the DAO, the members have special rights like funding the deals and voting in the times of disputes.
   
 > Create a new deal proposal
 
-This function is used to create a new deal, the restrictions on who can create a deal can be fully customized in the implementation contract.
+This function is used to create a new deal, they are created by the clients.
 
 
 > Activate the deal
@@ -57,9 +58,9 @@ The function seeks verification from the contract on the storage provider's clai
 
 > Reward
 
-This function can be found inside the DataDAOCore.sol file, and is responsible to send $FIL to the storage provider. The districution of the $FIL and the time of release of the funds can be customized in the implementation contract.
+This function can be found inside the DataDAOCore.sol file, and is responsible to send $FIL to the storage provider.
 
-## Data DAO Bounty Contract
+## Data DAO Bounty Contract Functionalities 
 The users with the Data DAO membership NFT can join the Data DAO as a member and would be able to fund the deals.
 
 Once the deal proposal is created by a member and $FIL are locked inside the contract, the admins would either approve or reject the proposal. If the deal proposal is rejected, the member gets back the locked $FIL else the deal is taken forward to storage provider. 
